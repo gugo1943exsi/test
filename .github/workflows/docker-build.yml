@@ -12,5 +12,5 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Byg docker image
-              run: docker build -t hello-python ./HelloWorldDocker
+              run: docker build -t "hello-python" ./HelloWorldDocker
 
