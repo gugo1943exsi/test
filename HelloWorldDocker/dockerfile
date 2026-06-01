@@ -1,0 +1,13 @@
+#hvilken version eller hvilket python image skal vi bruge? 
+FROM python:3.14-slim  
+
+
+WORKDIR /app
+
+#kopier alle filer fra rodmappen til app mappen i containeren
+COPY . .
+
+#installer dependencies
+CMD ["python", "HelloWorldDock.py"]
+
+
