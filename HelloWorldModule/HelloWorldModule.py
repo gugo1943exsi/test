@@ -15,4 +15,4 @@ def myPrint(myString):
     Description:
         This function takes a string as an argument and prints it to the console.
     """
-    print(myString)
+    print(myString + "!!!!")
