@@ -8,12 +8,25 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        
+        permissions:
+            contents: read
+            packages: write
 
         steps:
             - uses: actions/checkout@v4
-            - name: Byg docker image
-              run: docker build -t "hello-python" ./HelloWorldDocker
-              
-            - name: Run docker image
-              run: docker run hello-python
+            
+            - name: log in to GitHub Container Registry
+
+              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            - name: Build and push Docker image
+              run: docker build -t ghcr.io/${{ github.repository_owner }}/hello-ghcr:latest ./HelloWorldDocker
+            
+            - name: run Docker image
+              run: docker run ghcr.io/${{ github.repository_owner}}/hello-ghcr:latest
+
+            - name: Push Docker image to GitHub Container Registry
+              run: docker push ghcr.io/${{ github.repository_owner }}/hello-ghcr:latest
+
 
