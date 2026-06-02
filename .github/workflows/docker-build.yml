@@ -13,4 +13,7 @@ jobs:
             - uses: actions/checkout@v4
             - name: Byg docker image
               run: docker build -t "hello-python" ./HelloWorldDocker
+              
+            - name: Run docker image
+              run: docker run hello-python
 
