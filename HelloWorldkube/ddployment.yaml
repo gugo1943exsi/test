@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-webserver
+  name: my-webserver2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-webserver
+      app: my-webserver2
   template:
     metadata:
       labels:
-        app: my-webserver
+        app: my-webserver2
     spec:
       containers:
-      - name: my-webserver
-        image: ghcr.io/gugo1943exsi/hello-gg:latest
-        imagePullPolicy: Never
+      - name: my-webserver2
+        image: ghcr.io/gugo1943exsi/hello-gig:latest
+        imagePullPolicy: Always
