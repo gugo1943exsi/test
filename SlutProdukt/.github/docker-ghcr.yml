@@ -1,0 +1,30 @@
+name:
+    Byg docker image
+
+on:
+    push:
+        branches: [ main ]
+    
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        
+        permissions:
+            contents: read
+            packages: write
+
+        steps:
+            - uses: actions/checkout@v4
+            
+            - name: log in to GitHub Container Registry
+
+              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            - name: Build and push Docker image
+              run: docker build -t ghcr.io/${{ github.repository_owner }}/python-simple:latest ./SlutProdukt
+            
+            - name: run Docker image
+              run: docker run -d ghcr.io/${{ github.repository_owner}}/python-simple:latest
+
+            - name: Push Docker image to GitHub Container Registry
+              run: docker push ghcr.io/${{ github.repository_owner }}/python-simple:latest
