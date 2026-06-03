@@ -1,0 +1,22 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install Lubuntu desktop + XRDP
+RUN apt update && \
+    apt install -y lubuntu-desktop xrdp sudo && \
+    adduser xrdp ssl-cert && \
+    apt clean
+
+# Create user
+RUN useradd -m testuser && \
+    echo "testuser:1234" | chpasswd && \
+    usermod -aG sudo testuser
+
+# IMPORTANT: Start desktop session
+RUN echo "startlxde" > /home/testuser/.xsession
+
+# Expose RDP port
+EXPOSE 3389
+
+CMD /usr/sbin/xrdp-sesman & /usr/sbin/xrdp -nodaemon
