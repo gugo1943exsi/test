@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-simple
+  labels:
+    app: python-simple
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-simple
+  template:
+    metadata:
+      labels:
+        app: python-simple
+    spec:
+      containers:
+        - name: python-simple
+          image: ghcr.io/gugo1943exsi/python-simple:latest
+          imagePullPolicy: Always
