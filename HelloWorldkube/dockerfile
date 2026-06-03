@@ -8,6 +8,6 @@ WORKDIR /app
 COPY . .
 
 #installer dependencies
-CMD ["python", "HelloWorldDock.py"]
+CMD ["python", "counter.py"]
 
 
